@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} New Category {% endblock %}
+
+{% block content %}
+
+<h1>Add a New Category</h1> 
+
+{% if user.is_authenticated %}
+
+<div class="form-group"> <!--form-group is a bootstrap class-->
+    <form method="POST">
+        {% csrf_token %} <!-- security csrf -->
+        {{ form.as_p }}
+        <button class="btn btn-success"> Create Category </button> <a href="{% url 'home' %}" class="btn btn-danger"> Cancel </a>
+    </form>
+</div>
+
+{% else %}
+    <h1>Please login to interact. Thanks </h1> 
+{% endif %}
+    
+{% endblock %}

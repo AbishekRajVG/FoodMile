@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} User Profile {% endblock %}
+
+{% block content %}
+
+<h1>User Profile</h1> 
+
+
+<div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        {% if page_user.profile_picture %}
+            <img src="{{ page_user.profile_picture.url }}" class="card-img">
+        {% else %}
+            <img src="{% static 'foodmileblog/images/static_profile_pic.png' %}" class="card-img">
+        {% endif %}
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h5 class="card-title"><a href="{% url 'show-profile-page' page_user.id %}">{{ page_user.user.first_name }} {{ page_user.user.last_name }}</a></h5>
+          <p class="card-text"><small class="text-muted">
+            {% if page_user.personal_website_url %}<a href="{{ page_user.personal_website_url }}">WEBSITE</a> {% endif %}
+            {% if page_user.instragram_url %} <a href="{{ page_user.instragram_url }}">INSTAGRAM</a> {% endif %}
+            {% if page_user.twitter_url %} <a href="{{ page_user.twitter_url }}">TWITTER</a> {% endif %}
+            </small></p>
+          <p class="card-text">{{ page_user.bio }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    
+{% endblock %}

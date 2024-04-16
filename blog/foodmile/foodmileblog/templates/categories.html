@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if posts_of_category %}
+
+<h1> Category: {{ ctg }}  </h1>
+
+<ul>
+{% for post in posts_of_category %}
+    <li><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> - by {{ post.author }} 
+        aka {{ post.author.first_name }} {{ post.author.last_name}} <br/>
+        {{ post.summary }}
+        <br/>
+        {% if user.is_authenticated %} 
+            <a class="btn btn-warning btn-sm" href="{% url 'update-post' post.pk %}">Edit</a>
+            <a class="btn btn-danger btn-sm" href="{% url 'delete-post' post.pk %}">Delete</a>
+        {% endif %}
+        <br/><br/>
+    </li> 
+{% endfor %}
+</ul>
+
+{% else %}
+    <h3> 404 Oops!! this page does not exist. </h3>
+{% endif %}
+
+{% endblock %}

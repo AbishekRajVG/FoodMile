@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Create Profile Page {% endblock %}
+
+{% block content %}
+
+<h1>Create Profile Page</h1> 
+
+{% if user.is_authenticated %}
+
+    <div class="form-group"> <!--form-group is a bootstrap class-->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %} <!-- security csrf -->
+            <!-- {{ form.media }} -->
+            {{ form.as_p }}
+            <button class="btn btn-success"> Create Profile </button> <a href="{% url 'home' %}" class="btn btn-danger"> Cancel </a>
+        </form>
+    </div> 
+
+{% else %}
+    <h1>Please login to interact. Thanks </h1> 
+{% endif %}
+    
+{% endblock %}
